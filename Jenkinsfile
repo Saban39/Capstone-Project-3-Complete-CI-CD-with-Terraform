@@ -17,8 +17,8 @@ pipeline {
             steps {
                 script {
                     echo "creating EKS cluster"
-                    sh "terraform init"
-                    sh "terraform apply --auto-approve"
+                    sh "sudo -i terraform init"
+                    sh "sudo -i terraform apply --auto-approve"
                     
                     env.K8S_CLUSTER_URL = sh(
                         script: "terraform output cluster_url",
