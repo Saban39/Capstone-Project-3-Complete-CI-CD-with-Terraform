@@ -11,7 +11,7 @@ pipeline {
             environment {
                 TF_VAR_env_prefix = "dev"
                 TF_VAR_k8s_version = "1.28"
-                TF_VAR_cluster_name = "sg-cluster"
+                TF_VAR_cluster_name = "cluster-sg"
                 TF_VAR_region = "eu-central-1"
             }
             steps {
