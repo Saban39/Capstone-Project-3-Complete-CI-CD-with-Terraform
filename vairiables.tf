@@ -7,7 +7,7 @@ variable k8s_version {
 }
 
 variable cluster_name {
-  default = "sg-test-cluster"
+  default = "cluster-sg-test"
 }
 
 variable region {

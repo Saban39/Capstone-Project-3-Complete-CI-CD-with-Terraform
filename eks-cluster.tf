@@ -9,7 +9,7 @@ module "eks" {
   subnet_ids = module.vpc.private_subnets
   vpc_id     = module.vpc.vpc_id
   tags = {
-    environment = "sg-bootcamp"
+    environment = "bootcamp-sg"
   }
   # starting from EKS 1.23 CSI plugin is needed for volume provisioning.
   cluster_addons = {
@@ -41,7 +41,7 @@ module "eks" {
       name = "sg-fargate-profile"
       selectors = [
         {
-          namespace = "sg-app"
+          namespace = "app-sg"
         }
       ]
     }
