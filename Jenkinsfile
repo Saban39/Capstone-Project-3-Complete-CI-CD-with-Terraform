@@ -6,10 +6,10 @@ pipeline {
   environment {
     AWS_ACCESS_KEY_ID     = credentials('jenkins_aws_access_key_id')
     AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
-    TERRAFORM_BIN         = 'terraform'
+    TERRAFORM_BIN         = '/usr/local/bin/terraform'
     TF_VAR_env_prefix     = "dev"
     TF_VAR_k8s_version    = "1.28"
-    TF_VAR_cluster_name   = "my-cluster"
+    TF_VAR_cluster_name   = "cluster-sg"
     TF_VAR_region         = "eu-central-1"
   }
 
