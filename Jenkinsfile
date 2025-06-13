@@ -59,8 +59,8 @@ pipeline {
         echo "🔧 Konfiguriere Kubeconfig"
         sh """
           export PATH=$PATH:/usr/local/bin
-          export KUBECONFIG=/root/.kube/config
-          mkdir -p $(dirname $KUBECONFIG)
+          export KUBECONFIG=/var/root/.kube/config
+          
           aws eks update-kubeconfig \
           --name ${TF_VAR_cluster_name} \
           --region ${TF_VAR_region} \
