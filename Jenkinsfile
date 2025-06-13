@@ -63,7 +63,7 @@ pipeline {
             --name ${TF_VAR_cluster_name} \
             --region ${TF_VAR_region}
         """
-        sh "kubectl get nodes"
+        sh "/Users/sgworker/.docker/bin/kubectl get nodes"
       }
     }
 
