@@ -68,3 +68,14 @@ terraform init
 
 terraform apply -var-file="dev.tfvars"
 ```
+
+Lösung C: Vorherige Ressourcen löschen (manuell oder automatisch)
+Wenn du sicher bist, dass die Ressourcen nicht mehr gebraucht werden, lösche sie manuell via AWS CLI oder Console:
+
+bash
+Kopieren
+Bearbeiten
+aws logs delete-log-group --log-group-name /aws/eks/cluster-sg/cluster
+
+aws kms delete-alias --alias-name alias/eks/cluster-sg
+Oder baue eine Cleanup-Stage in Jenkins, die das macht (z. B. bei post-Stage).

@@ -4,7 +4,7 @@ pipeline {
   agent any
 
   environment {
-    AWS_ACCESS_KEY_ID     = credentials('jenkins_aws_access_key_id')
+    AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
     AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
     TERRAFORM_BIN         = '/usr/local/bin/terraform'
     TF_VAR_env_prefix     = "dev"
@@ -31,6 +31,7 @@ pipeline {
       steps {
         echo "⏳ Warte auf EKS Cluster Status ACTIVE"
         sh """
+          export PATH=$PATH:/usr/local/bin
           aws eks wait cluster-active \
             --name ${TF_VAR_cluster_name} \
             --region ${TF_VAR_region}
