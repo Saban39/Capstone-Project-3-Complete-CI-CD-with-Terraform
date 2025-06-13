@@ -59,12 +59,15 @@ pipeline {
         echo "🔧 Konfiguriere Kubeconfig"
         sh """
           export PATH=$PATH:/usr/local/bin
+          export KUBECONFIG=/root/.kube/config
+          mkdir -p $(dirname $KUBECONFIG)
           aws eks update-kubeconfig \
-            --name ${TF_VAR_cluster_name} \
-            --region ${TF_VAR_region}
+          --name ${TF_VAR_cluster_name} \
+          --region ${TF_VAR_region} \
+          --kubeconfig $KUBECONFIG
+          /Users/sgworker/.docker/bin/kubectl --kubeconfig=$KUBECONFIG get nodes
         """
-        sh "/Users/sgworker/.docker/bin/kubectl get nodes"
-      }
+         }
     }
 
     stage('Apply Helm/MySQL') {
