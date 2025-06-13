@@ -1,34 +1,82 @@
 #!/usr/bin/env groovy
 
 pipeline {
-    agent any
-    environment {
-        AWS_ACCESS_KEY_ID = credentials('jenkins_aws_access_key_id')
-        AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
+  agent any
+
+  environment {
+    AWS_ACCESS_KEY_ID     = credentials('jenkins_aws_access_key_id')
+    AWS_SECRET_ACCESS_KEY = credentials('jenkins_aws_secret_access_key')
+    TERRAFORM_BIN         = 'terraform'
+    TF_VAR_env_prefix     = "dev"
+    TF_VAR_k8s_version    = "1.28"
+    TF_VAR_cluster_name   = "my-cluster"
+    TF_VAR_region         = "eu-central-1"
+  }
+
+  stages {
+    stage('Terraform Init') {
+      steps {
+        sh "${TERRAFORM_BIN} init -input=false"
+      }
     }
-    stages {
-        stage('provision cluster') {
-            environment {
-                TF_VAR_env_prefix = "dev"
-                TF_VAR_k8s_version = "1.28"
-                TF_VAR_cluster_name = "cluster-sg"
-                TF_VAR_region = "eu-central-1"
-            }
-            steps {
-                script {
-                    echo "creating EKS cluster"
-                    sh "/usr/local/bin/terraform init"
-                    sh "/usr/local/bin/terraform apply --auto-approve"
-                    
-                    env.K8S_CLUSTER_URL = sh(
-                        script: "terraform output cluster_url",
-                        returnStdout: true
-                    ).trim()
-                    
-                    // set kubeconfig access
-                    sh "aws eks update-kubeconfig --name ${TF_VAR_cluster_name} --region ${TF_VAR_region}"
-                }
-            }
+
+    stage('Apply VPC and EKS') {
+      steps {
+        echo "🌐 Provisioniere VPC und EKS (ohne Helm)"
+        sh "${TERRAFORM_BIN} apply -target=module.vpc -target=module.eks -auto-approve"
+      }
+    }
+
+    stage('Wait for EKS Cluster') {
+      steps {
+        echo "⏳ Warte auf EKS Cluster Status ACTIVE"
+        sh """
+          aws eks wait cluster-active \
+            --name ${TF_VAR_cluster_name} \
+            --region ${TF_VAR_region}
+        """
+      }
+    }
+ 
+    stage('Read Terraform Outputs') {
+    steps {
+        script {
+            echo "📦 Lese Terraform Outputs"
+            env.K8S_CLUSTER_ENDPOINT = sh(
+            script: "${TERRAFORM_BIN} output -raw cluster_endpoint",
+            returnStdout: true
+            ).trim()
+
+        echo "✅ Cluster Endpoint: ${env.K8S_CLUSTER_ENDPOINT}"
         }
     }
+    }
+
+
+    stage('Configure kubectl') {
+      steps {
+        echo "🔧 Konfiguriere Kubeconfig"
+        sh """
+          aws eks update-kubeconfig \
+            --name ${TF_VAR_cluster_name} \
+            --region ${TF_VAR_region}
+        """
+        sh "kubectl get nodes"
+      }
+    }
+
+    stage('Apply Helm/MySQL') {
+      steps {
+        echo "🚀 Helm/MySQL installieren"
+        sh "${TERRAFORM_BIN} apply -auto-approve"
+      }
+    }
+  }
+
+  post {
+    always {
+      sh "${TERRAFORM_BIN} state pull > state-${BUILD_NUMBER}.tfstate"
+      archiveArtifacts artifacts: "state-*.tfstate", onlyIfSuccessful: true
+    }
+  }
 }
