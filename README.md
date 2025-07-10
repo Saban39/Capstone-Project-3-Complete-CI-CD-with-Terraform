@@ -1,12 +1,30 @@
 # 12 - Infrastructure as Code with Terraform
-## Exercises for Module "Infrastructure as Code with Terraform"
+#### This project is for the Devops Bootcamp module "Infrastructure as Code with Terraform" 
+
+I created a fully automated CI/CD pipeline to deploy a Java application on an Amazon EKS (Elastic Kubernetes Service) cluster.
+Through this project, I learned how to provision an EKS cluster using eksctl,  how to manage Docker images using both Docker Hub and Amazon ECR. 
+I also gained hands-on experience in configuring Jenkins pipelines and writing a Jenkinsfile to automate the build, test, and deployment processes.
+First, I used eksctl to create an EKS cluster on AWS. Then, I built a Docker image of my Java application and initially tested the deployment using Docker Hub. 
+Later, I pushed the image to an Amazon ECR repository. After setting up Jenkins, I wrote a Jenkinsfile to automate the entire CI/CD process — including building the image, pushing it to ECR, and deploying it to the EKS cluster. 
+This way, any code changes automatically triggered the pipeline and deployed the updated application.
 
 
-Your K8s cluster on AWS is successfully running and used as a production environment. Your team wants to have additional K8s environments for development, test and staging with the same exact configuration and setup, so they can properly test and try out new features before releasing to production. So you must create 3 more EKS clusters.
+## 📄 Included PDF Resources
 
-But you don't want to do that manually 3 times, so you decide it would be much more efficient to script creating the EKS cluster and execute that same script 3 times to create 3 more identical environments.
+CAPSTONE PROJECT-3
+
+## Evidence / Proof
+
+Here are my notes, work, solutions, and test results for the module **"Infrastructure as Code with Terraform"**:  
+👉 [PDF Link to Module Notes & Work](./12-Infrastructure_as_Code_with_Terraform.pdf)
 
 
+All of my notes, work, solutions, and test results can be found in the PDF 11-Kubernetes_on_AWS-EKS.pdf. 
+My complete documentation, including all notes and tests from the bootcamp, is available in this repository: https://github.com/Saban39/my_devops-bootcamp-pdf-notes-and-solutions.git
+
+
+
+## My notes, work, solutions, and test results for Module "Kubernetes on AWS"
 
 
 
