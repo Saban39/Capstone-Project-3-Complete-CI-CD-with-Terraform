@@ -1,12 +1,19 @@
 # 12 - Infrastructure as Code with Terraform
 #### This project is for the Devops Bootcamp module "Infrastructure as Code with Terraform" 
 
-I created a fully automated CI/CD pipeline to deploy a Java application on an Amazon EKS (Elastic Kubernetes Service) cluster.
-Through this project, I learned how to provision an EKS cluster using eksctl,  how to manage Docker images using both Docker Hub and Amazon ECR. 
-I also gained hands-on experience in configuring Jenkins pipelines and writing a Jenkinsfile to automate the build, test, and deployment processes.
-First, I used eksctl to create an EKS cluster on AWS. Then, I built a Docker image of my Java application and initially tested the deployment using Docker Hub. 
-Later, I pushed the image to an Amazon ECR repository. After setting up Jenkins, I wrote a Jenkinsfile to automate the entire CI/CD process — including building the image, pushing it to ECR, and deploying it to the EKS cluster. 
-This way, any code changes automatically triggered the pipeline and deployed the updated application.
+In this project, I built a **fully automated CI/CD pipeline** using **Jenkins**, **Terraform**, and **Helm**.
+I created a `Jenkinsfile` and Jenkins pipelines that used **Terraform** to provision a complete **EKS (Elastic Kubernetes Service) cluster** on **AWS**. For managing the Terraform state, I configured an **S3 bucket** as the remote backend.
+As part of the deployment process, I also deployed a **MySQL database** onto the EKS cluster using **Helm charts**.
+
+This project helped me understand and apply:
+- Infrastructure provisioning with **Terraform**
+- Using **S3** as a backend for Terraform state files
+- Deploying and managing applications on **EKS** using **Helm**
+- Creating and managing **Jenkins pipelines** for end-to-end CI/CD automation
+
+
+The pipeline starts from code changes, triggers the Terraform process via Jenkins to provision the EKS infrastructure, sets up MySQL using Helm, and completes with the automated deployment of applications.  
+This exercise gave me hands-on experience with modern DevOps tools and practices such as **Infrastructure as Code**, **GitOps workflows**, and **Kubernetes-based deployments**.
 
 
 ## 📄 Included PDF Resources
