@@ -17,7 +17,7 @@ This exercise gave me hands-on experience with modern DevOps tools and practices
 
 
 
-# CAPSTONE PROJECT-2 project execution
+# CAPSTONE PROJECT-3 project execution
 
 
 # 12 - Infrastructure as Code with Terraform
