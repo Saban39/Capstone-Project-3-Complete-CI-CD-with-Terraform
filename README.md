@@ -1,19 +1,27 @@
-# 12 - Infrastructure as Code with Terraform
-#### This project is for the Devops Bootcamp module "Infrastructure as Code with Terraform" 
+## Capstone Project 2: Automate Kubernetes Deployment
 
+### What did I build?
 In this project, I built a **fully automated CI/CD pipeline** using **Jenkins**, **Terraform**, and **Helm**.
-I created a `Jenkinsfile` and Jenkins pipelines that used **Terraform** to provision a complete **EKS (Elastic Kubernetes Service) cluster** on **AWS**. For managing the Terraform state, I configured an **S3 bucket** as the remote backend.
-As part of the deployment process, I also deployed a **MySQL database** onto the EKS cluster using **Helm charts**.
 
+### What have I learned?
+I created a `Jenkinsfile` and Jenkins pipelines that used **Terraform** to provision a complete **EKS (Elastic Kubernetes Service) cluster** on **AWS**. For managing the Terraform state, I configured an **S3 bucket** as the remote backend. As part of the deployment process, I also deployed a **MySQL database** onto the EKS cluster using **Helm charts**.
 This project helped me understand and apply:
 - Infrastructure provisioning with **Terraform**
 - Using **S3** as a backend for Terraform state files
 - Deploying and managing applications on **EKS** using **Helm**
 - Creating and managing **Jenkins pipelines** for end-to-end CI/CD automation
 
-
+### My project description. 
 The pipeline starts from code changes, triggers the Terraform process via Jenkins to provision the EKS infrastructure, sets up MySQL using Helm, and completes with the automated deployment of applications.  
 This exercise gave me hands-on experience with modern DevOps tools and practices such as **Infrastructure as Code**, **GitOps workflows**, and **Kubernetes-based deployments**.
+
+
+
+# CAPSTONE PROJECT-2 project execution
+
+
+# 12 - Infrastructure as Code with Terraform
+#### This project is for the Devops Bootcamp module "Infrastructure as Code with Terraform" 
 
 
 ## 📄 Included PDF Resources
