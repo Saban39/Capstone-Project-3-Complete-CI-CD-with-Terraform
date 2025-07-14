@@ -1,4 +1,4 @@
-## Capstone Project 2: Automate Kubernetes Deployment
+## Capstone Project 3: Complete CI/CD with Terraform
 
 ### What did I build?
 In this project, I built a **fully automated CI/CD pipeline** using **Jenkins**, **Terraform**, and **Helm**.
